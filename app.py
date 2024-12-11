@@ -45,7 +45,8 @@ def predict():
     try:
         # Get the image from the request
         data = request.get_json()
-        img_data = base64.b64decode(data['image'])
+        img_data = base64.b64decode(data['image']).decode('utf-8')
+        print(img_data)
         
         # Convert to numpy array
         nparr = np.frombuffer(img_data, np.uint8)
@@ -79,4 +80,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000) 
+    app.run(host='0.0.0.0', port=5000)
